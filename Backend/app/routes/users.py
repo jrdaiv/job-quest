@@ -9,15 +9,15 @@ from app.services.emails import send_signup_email
 
 app = Blueprint('users', __name__, url_prefix='/api/users')
 
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['POST', 'OPTIONS'])
 def create_user():
+    if request.method == 'OPTIONS':
+        # This is the preflight request — just return a 204 with no content
+        return '', 204
+
     try:
         user_data = s.user_schema.load(request.json)
         user_saved = users_svc.create_user(user_data)
-        
-        # Send the signup email after the user is created
-        # send_signup_email(user_saved.email, user_saved.name)
-        
         return jsonify({'message': 'User Created'}), 201
     except ValidationError as e:
         return jsonify(e.messages), 400
