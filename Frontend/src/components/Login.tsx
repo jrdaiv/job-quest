@@ -14,7 +14,7 @@ const LoginPage: React.FC = () => {
   const fetchUserLogin = async (e: React.FormEvent) => {
     e.preventDefault(); // Prevent default form submission
     try {
-      const response = await axios.post(`${API_URL}/api/users/register`, {
+      const response = await axios.post(`${API_URL}/api/auth/login`, {
         email: email,
         password: password,
       });
