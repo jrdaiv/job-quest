@@ -1,1 +1,1 @@
-export const API_URL = 'https://job-quest-455265746015.us-central1.run.app';
+export const API_URL = import.meta.env.VITE_API_URL;
