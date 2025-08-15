@@ -6,9 +6,11 @@ from app.database.database import database as db
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-app = Blueprint('auth', __name__, url_prefix='/api/auth')
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['POST', 'OPTIONS'])
 def login():
+    if request.method == 'OPTIONS':
+        return '', 204  # Preflight success
+
     data = request.get_json()
     if not data or not data.get('email') or not data.get('password'):
         return jsonify(message="Email and password are required"), 400
@@ -24,7 +26,3 @@ def login():
         return jsonify(access_token=access_token), 200
     else:
         return jsonify(message="Invalid email or password"), 401
-    
-@app.route('/')
-def index():
-    return 'Welcome to the root route!'
