@@ -14,7 +14,7 @@ jwt = JWTManager()
 def create_app():
     # Create and configure the Flask application instance
     app = Flask(__name__)
-    def url = import.meta.
+   
     
     # Enable CORS for all routes and origins (public access)
     CORS(app, resources={r"/api/*": {"origins": "https://job-quest-frontend.onrender.com"}})
