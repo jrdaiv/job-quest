@@ -6,6 +6,7 @@ from app.database.database import database as db
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
+app = Blueprint('auth', __name__, url_prefix='/api/auth')
 @app.route('/login', methods=['POST', 'OPTIONS'])
 def login():
     if request.method == 'OPTIONS':
