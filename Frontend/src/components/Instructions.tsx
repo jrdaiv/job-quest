@@ -2,11 +2,14 @@ import { Button } from "@material-tailwind/react";
 import "inter-ui";
 import pageInfoIllustration from "../assets/Page Info Illustration-02.svg";
 import pageFooterIllustration from "../assets/Quest Page Footer Illustration-03.svg"
+import { useNavigate } from "react-router-dom";
 
 const Instructions: React.FC = () => {
 
+  const navigate = useNavigate();
+
   const handleButtonClick = () => {
-    window.location.href = "/myquests";
+    navigate("/myquests");
     console.log("Button clicked!");
   };
 
