@@ -52,5 +52,9 @@ def create_app():
     with app.app_context():
         db.create_all()  # Creates tables based on imported models if they don't exist
 
+    @app.route('/')
+    def index():
+        return 'Welcome to your Flask app!'
+
     # Return the configured Flask application
     return app

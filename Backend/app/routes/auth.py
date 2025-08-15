@@ -24,3 +24,7 @@ def login():
         return jsonify(access_token=access_token), 200
     else:
         return jsonify(message="Invalid email or password"), 401
+    
+@app.route('/')
+def index():
+    return 'Welcome to the root route!'
