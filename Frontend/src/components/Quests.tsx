@@ -45,6 +45,9 @@ const QuestPage: React.FC<QuestsProps> = ({ onQuestsClick }) => {
     // const navigate = useNavigate();
 
     // **Load saved data from local storage when component mounts**
+
+    const API_URL = import.meta.env.VITE_API_URL;
+
     useEffect(() => {
         if (!userId) {
             console.error('User ID not found. Unable to load quests.');
@@ -56,7 +59,7 @@ const QuestPage: React.FC<QuestsProps> = ({ onQuestsClick }) => {
 
     const fetchAndApplyQuests = async (savedQuests: number[]) => {
         try {
-            const response = await axios.get('/api/quests/all');
+            const response = await axios.get(`${API_URL}/api/quests/all`);
             const updatedQuests = response.data.map((quest: Quest) => ({
                 ...quest,
                 completed: savedQuests.includes(quest.quest_id),
@@ -64,6 +67,7 @@ const QuestPage: React.FC<QuestsProps> = ({ onQuestsClick }) => {
             setQuests(updatedQuests);
         } catch (error) {
             console.error('Error fetching quests:', error);
+            setQuests([]); // Set to empty array on error
         }
     };
 
