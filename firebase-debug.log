@@ -1,0 +1,93 @@
+[debug] [2025-07-18T20:05:15.529Z] ----------------------------------------------------------------------
+[debug] [2025-07-18T20:05:15.532Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\kidx_\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init functions
+[debug] [2025-07-18T20:05:15.532Z] CLI Version:   14.11.0
+[debug] [2025-07-18T20:05:15.532Z] Platform:      win32
+[debug] [2025-07-18T20:05:15.532Z] Node Version:  v22.11.0
+[debug] [2025-07-18T20:05:15.532Z] Time:          Fri Jul 18 2025 13:05:15 GMT-0700 (Pacific Daylight Time)
+[debug] [2025-07-18T20:05:15.532Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-18T20:05:15.534Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2025-07-18T20:05:15.571Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-18T20:05:15.571Z] > authorizing via signed-in user (aahhdz24@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\kidx_\OneDrive\Desktop\Projects\job-quest\job-quest-project
+
+[debug] [2025-07-18T20:05:15.772Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2025-07-18T20:05:15.772Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2025-07-18T20:05:38.190Z] Checked if tokens are valid: false, expires at: 1751632396346
+[debug] [2025-07-18T20:05:38.190Z] Checked if tokens are valid: false, expires at: 1751632396346
+[debug] [2025-07-18T20:05:38.190Z] > refreshing access token with scopes: []
+[debug] [2025-07-18T20:05:38.192Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-07-18T20:05:38.192Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-07-18T20:05:38.395Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-07-18T20:05:38.396Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-07-18T20:05:38.402Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2025-07-18T20:05:38.795Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-07-18T20:05:38.795Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project job-quest-db (job-quest-db) 
+[info] 
+=== Functions Setup
+[debug] [2025-07-18T20:05:45.934Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-18T20:05:45.934Z] > authorizing via signed-in user (aahhdz24@gmail.com)
+[debug] [2025-07-18T20:05:45.934Z] [iam] checking project job-quest-db for permissions ["firebase.projects.get"]
+[debug] [2025-07-18T20:05:45.935Z] Checked if tokens are valid: true, expires at: 1752872737396
+[debug] [2025-07-18T20:05:45.935Z] Checked if tokens are valid: true, expires at: 1752872737396
+[debug] [2025-07-18T20:05:45.935Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/job-quest-db:testIamPermissions [none]
+[debug] [2025-07-18T20:05:45.935Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/job-quest-db:testIamPermissions x-goog-quota-user=projects/job-quest-db
+[debug] [2025-07-18T20:05:45.935Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/job-quest-db:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2025-07-18T20:05:46.208Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/job-quest-db:testIamPermissions 200
+[debug] [2025-07-18T20:05:46.208Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/job-quest-db:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2025-07-18T20:05:46.209Z] Checked if tokens are valid: true, expires at: 1752872737396
+[debug] [2025-07-18T20:05:46.210Z] Checked if tokens are valid: true, expires at: 1752872737396
+[debug] [2025-07-18T20:05:46.210Z] Checked if tokens are valid: true, expires at: 1752872737396
+[debug] [2025-07-18T20:05:46.210Z] Checked if tokens are valid: true, expires at: 1752872737396
+[debug] [2025-07-18T20:05:46.211Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/job-quest-db/services/cloudfunctions.googleapis.com [none]
+[debug] [2025-07-18T20:05:46.211Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/job-quest-db/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/job-quest-db
+[debug] [2025-07-18T20:05:46.213Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/job-quest-db/services/runtimeconfig.googleapis.com [none]
+[debug] [2025-07-18T20:05:46.213Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/job-quest-db/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/job-quest-db
+[debug] [2025-07-18T20:05:46.549Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/job-quest-db/services/cloudfunctions.googleapis.com 200
+[debug] [2025-07-18T20:05:46.549Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/job-quest-db/services/cloudfunctions.googleapis.com [omitted]
+[debug] [2025-07-18T20:05:46.550Z] Checked if tokens are valid: true, expires at: 1752872737396
+[debug] [2025-07-18T20:05:46.550Z] Checked if tokens are valid: true, expires at: 1752872737396
+[debug] [2025-07-18T20:05:46.550Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/job-quest-db/services/cloudfunctions.googleapis.com:enable [none]
+[debug] [2025-07-18T20:05:46.551Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/job-quest-db/services/cloudfunctions.googleapis.com:enable x-goog-quota-user=projects/job-quest-db
+[debug] [2025-07-18T20:05:46.733Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/job-quest-db/services/runtimeconfig.googleapis.com 200
+[debug] [2025-07-18T20:05:46.734Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/job-quest-db/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2025-07-18T20:05:46.956Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/job-quest-db/services/cloudfunctions.googleapis.com:enable 200
+[debug] [2025-07-18T20:05:46.956Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/job-quest-db/services/cloudfunctions.googleapis.com:enable [omitted]
+[info] Let's create a new codebase for your functions.
+[info] A directory corresponding to the codebase will be created in your project
+[info] with sample code pre-configured.
+
+[info] See https://firebase.google.com/docs/functions/organize-functions for
+[info] more information on organizing your functions using codebases.
+
+[info] Functions can be deployed with firebase deploy.
+
+[info] +  Wrote functions/requirements.txt 
+[info] +  Wrote functions/.gitignore 
+[info] +  Wrote functions/main.py 
+[debug] [2025-07-18T20:07:34.324Z] Running command with virtualenv: command="C:\Users\kidx_\OneDrive\Desktop\Projects\job-quest\job-quest-project\functions\venv\Scripts\activate.bat", args=["","&&","pip3","install","--upgrade","pip"]
+[debug] [2025-07-18T20:07:34.501Z] Error: spawn "C:\Users\kidx_\OneDrive\Desktop\Projects\job-quest\job-quest-project\functions\venv\Scripts\activate.bat" ENOENT
+    at notFoundError (C:\Users\kidx_\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\lib\enoent.js:6:26)
+    at verifyENOENT (C:\Users\kidx_\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\lib\enoent.js:40:16)
+    at cp.emit (C:\Users\kidx_\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\lib\enoent.js:27:25)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12)
+    at Process.callbackTrampoline (node:internal/async_hooks:130:17)
+[error] 
+[error] Error: An unexpected error has occurred.

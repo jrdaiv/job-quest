@@ -1,0 +1,19 @@
+runtime: python312
+env: standard
+instance_class: F1
+handlers:
+  - url: /api/.*
+    script: auto
+    secure: always
+  - url: /assets/(.*)
+    secure: always
+    static_files: dist/assets/\1
+    upload: dist/assets/(.*)
+  - url: /(.+\.(js|css|png|jpg|gif|ico|json|svg))$
+    secure: always
+    static_files: dist/\1
+    upload: dist/(.+\.(js|css|png|jpg|gif|ico|json|svg))$
+  - url: /.*
+    secure: always
+    static_files: dist/index.html
+    upload: dist/index.html
