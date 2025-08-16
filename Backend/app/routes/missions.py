@@ -9,7 +9,7 @@ from app.config.config import Config as cf
 app = Blueprint('missions', __name__, url_prefix='/api/missions')
 # Create a Blueprint for missions with a URL prefix.
 
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['POST', 'OPTIONS'])
 def create_mission():
     # Route to create a new mission
     try:
@@ -27,7 +27,7 @@ def create_mission():
         return jsonify(traceback, 500)
         # Return general error response.
 
-@app.route('/all', methods=['GET'])
+@app.route('/all', methods=['GET', 'OPTIONS'])
 def get_all():
     # Route to get all missions.
     all_missions = missions_svc.get_all()
@@ -35,7 +35,7 @@ def get_all():
     return s.missions_schema.jsonify(all_missions), 200
     # Return the missions in JSON format with a 200 status code.
 
-@app.route("/<int:mission_id>", methods=['GET'])
+@app.route("/<int:mission_id>", methods=['GET', 'OPTIONS'])
 def get_by_id(mission_id):
     # Route to get a mission by its ID.
     mission = missions_svc.get_by_id(mission_id)
@@ -43,7 +43,7 @@ def get_by_id(mission_id):
     return s.mission_schema.jsonify(mission), 200
     # Return the mission in JSON format with a 200 status code.
 
-@app.route('/in-quest/<int:quest_id>', methods=['GET'])
+@app.route('/in-quest/<int:quest_id>', methods=['GET', 'OPTIONS'])
 def get_by_quest_id(quest_id):
     # Route to get missions by quest ID.
     all_missions = missions_svc.get_by_quest_id(quest_id)
@@ -51,7 +51,7 @@ def get_by_quest_id(quest_id):
     return s.missions_schema.jsonify(all_missions), 200
     # Return the missions in JSON format with a 200 status code.
 
-@app.route("/update-mission/<int:mission_id>", methods=['PUT'])
+@app.route("/update-mission/<int:mission_id>", methods=['PUT', 'OPTIONS'])
 def update_mission(mission_id):
     # Route to update a mission by its ID.
     try:
@@ -69,7 +69,7 @@ def update_mission(mission_id):
         return jsonify(traceback, 500)
         # Return general error response.
 
-@app.route("delete-mission/<int:mission_id>", methods=['DELETE'])
+@app.route("delete-mission/<int:mission_id>", methods=['DELETE', 'OPTIONS'])
 def delete_mission(mission_id):
     # Route to delete a mission by its ID.
     try:

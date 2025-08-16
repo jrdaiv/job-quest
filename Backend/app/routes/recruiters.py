@@ -6,7 +6,7 @@ from app.database.models import schemas as s
 
 app = Blueprint('recruiters', __name__, url_prefix='/api/recruiters')
 
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['POST', 'OPTIONS'])
 def create_recruiter():
     try:
         recruiter_data = s.recruiter_schema.load(request.json)
@@ -17,7 +17,7 @@ def create_recruiter():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/all', methods=['GET'])
+@app.route('/all', methods=['GET', 'OPTIONS'])
 def get_all_recruiters():
     all_recruiters = recruiter_svc.get_all_recruiters()
     return s.recruiters_schema.jsonify(all_recruiters), 200
@@ -27,7 +27,7 @@ def get_recruiter_by_id(recruiter_id):
     recruiter = recruiter_svc.get_recruiter_by_id(recruiter_id)
     return s.recruiter_schema.jsonify(recruiter), 200
 
-@app.route("/update/<int:recruiter_id>", methods=['PUT'])
+@app.route("/update/<int:recruiter_id>", methods=['PUT', 'OPTIONS'])
 def update_recruiter(recruiter_id):
     try:
         new_info = s.recruiter_schema.load(request.json, partial=True)
@@ -38,7 +38,7 @@ def update_recruiter(recruiter_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route("/delete/<int:recruiter_id>", methods=['DELETE'])
+@app.route("/delete/<int:recruiter_id>", methods=['DELETE', 'OPTIONS'])
 def delete_recruiter(recruiter_id):
     try:
         response = recruiter_svc.delete_recruiter(recruiter_id)

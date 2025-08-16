@@ -16,7 +16,7 @@ def should_force_update():
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=[['POST', 'OPTIONS']])
 def create_job():
     # Route to create a new job
     try:
@@ -35,7 +35,7 @@ def create_job():
         return jsonify({'error': str(e)}), 500
         # Return general error response.
 
-@app.route('/all', methods=['GET'])
+@app.route('/all', methods=['GET', 'OPTIONS'])
 @cache.cached(timeout=60)
 def get_all():
     # Route to get all jobs.
@@ -44,7 +44,7 @@ def get_all():
     return s.jobs_schema.jsonify(all_jobs), 200
     # Return the jobs in JSON format with a 200 status code.
 
-@app.route("/<int:job_id>", methods=['GET'])
+@app.route("/<int:job_id>", methods=['GET', 'OPTIONS'])
 def get_by_id(job_id):
     # Route to get a job by its ID.
     job = jobs_svc.get_by_id(job_id)
@@ -52,7 +52,7 @@ def get_by_id(job_id):
     return s.job_schema.jsonify(job), 200
     # Return the job in JSON format with a 200 status code.
 
-@app.route('/<int:user_id>/all', methods=['GET'])
+@app.route('/<int:user_id>/all', methods=['GET', 'OPTIONS'])
 @cache.cached(timeout=60, forced_update=should_force_update)
 def get_by_user_id(user_id):
     # Route to get all jobs.
@@ -61,7 +61,7 @@ def get_by_user_id(user_id):
     return s.jobs_schema.jsonify(all_jobs), 200
     # Return the jobs in JSON format with a 200 status code.
 
-@app.route("/update-job/<int:job_id>", methods=['PUT'])
+@app.route("/update-job/<int:job_id>", methods=['PUT', 'OPTIONS'])
 def update_job(job_id):
     # Route to update a job by its ID.
     try:
@@ -78,7 +78,7 @@ def update_job(job_id):
         return jsonify({'error': str(e)}), 500
         # Return general error response.
 
-@app.route("/delete-job/<int:job_id>", methods=['DELETE'])
+@app.route("/delete-job/<int:job_id>", methods=['DELETE', 'OPTIONS'])
 def delete_job(job_id):
     # Route to delete a job by its ID.
     try:

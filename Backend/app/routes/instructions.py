@@ -9,7 +9,7 @@ from app.config.caching import cache
 app = Blueprint('instructions', __name__, url_prefix='/api/instructions')
 # Create a Blueprint for instructions with a URL prefix.
 
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['POST', 'OPTIONS'])
 def create_instruction():
     # Route to create a new instruction.
     try:
@@ -29,7 +29,7 @@ def create_instruction():
         return jsonify(traceback, 500)
         # Return general error response.
 
-@app.route('/all', methods=['GET'])
+@app.route('/all', methods=['GET', 'OPTIONS'])
 def get_all_instructions():
     # Route to get all instructions.
     all_instructions = instructions_svc.get_all_instructions()
@@ -37,7 +37,7 @@ def get_all_instructions():
     return s.instructions_schema.jsonify(all_instructions), 200
     # Return the instructions in JSON format with a 200 status code.
 
-@app.route("/<int:instruction_id>", methods=['GET'])
+@app.route("/<int:instruction_id>", methods=['GET', 'OPTIONS'])
 def get_instruction_by_id(instruction_id):
     # Route to get an instruction by its ID.
     instruction = instructions_svc.get_instruction_by_id(instruction_id)
@@ -45,7 +45,7 @@ def get_instruction_by_id(instruction_id):
     return s.instruction_schema.jsonify(instruction), 200
     # Return the instruction in JSON format with a 200 status code.
 
-@app.route("/mission/<int:mission_id>", methods=['GET'])
+@app.route("/mission/<int:mission_id>", methods=['GET', 'OPTIONS'])
 def get_by_mission_id(mission_id):
     # Route to get instructions by mission ID.
     instructions = instructions_svc.get_by_mission_id(mission_id)
@@ -53,7 +53,7 @@ def get_by_mission_id(mission_id):
     return s.instructions_schema.jsonify(instructions), 200
     # Return the instructions in JSON format with a 200 status code.
 
-@app.route("/update-instruction/<int:instruction_id>", methods=['PUT'])
+@app.route("/update-instruction/<int:instruction_id>", methods=['PUT', 'OPTIONS'])
 def update_instruction(instruction_id):
     # Route to update an instruction by its ID.
     try:
@@ -71,7 +71,7 @@ def update_instruction(instruction_id):
         return jsonify(traceback, 500)
         # Return general error response.
 
-@app.route("/delete-instruction/<int:instruction_id>", methods=['DELETE'])
+@app.route("/delete-instruction/<int:instruction_id>", methods=['DELETE', 'OPTIONS'])
 def delete_instruction(instruction_id):
     # Route to delete an instruction by its ID.
     try:

@@ -9,7 +9,7 @@ from app.config.caching import cache
 app = Blueprint('follow_ups', __name__, url_prefix='/api/follow_ups')
 # Create a Blueprint for follow_ups with a URL prefix.
 
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['POST', 'OPTIONS'])
 def create_follow_up():
     # Route to create a new follow_up.
     try:
@@ -29,7 +29,7 @@ def create_follow_up():
         return jsonify(traceback, 500)
         # Return general error response.
 
-@app.route('/all', methods=['GET'])
+@app.route('/all', methods=['GET', 'OPTIONS'])
 def get_all_follow_ups():
     # Route to get all follow_ups.
     all_follow_ups = follow_ups_svc.get_all_follow_ups()
@@ -37,7 +37,7 @@ def get_all_follow_ups():
     return s.follow_ups_schema.jsonify(all_follow_ups), 200
     # Return the follow_ups in JSON format with a 200 status code.
 
-@app.route("/<int:follow_up_id>", methods=['GET'])
+@app.route("/<int:follow_up_id>", methods=['GET', 'OPTIONS'])
 def get_follow_up_by_id(follow_up_id):
     # Route to get an follow_up by its ID.
     follow_up = follow_ups_svc.get_follow_up_by_id(follow_up_id)
@@ -45,7 +45,7 @@ def get_follow_up_by_id(follow_up_id):
     return s.follow_up_schema.jsonify(follow_up), 200
     # Return the follow_up in JSON format with a 200 status code.
 
-@app.route("/job/<int:job_id>", methods=['GET'])
+@app.route("/job/<int:job_id>", methods=['GET', 'OPTIONS'])
 def get_by_job_id(job_id):
     # Route to get follow_ups by job ID.
     follow_ups = follow_ups_svc.get_by_job_id(job_id)
@@ -53,7 +53,7 @@ def get_by_job_id(job_id):
     return s.follow_ups_schema.jsonify(follow_ups), 200
     # Return the follow_ups in JSON format with a 200 status code.
 
-@app.route("/update-follow-up/<int:follow_up_id>", methods=['PUT'])
+@app.route("/update-follow-up/<int:follow_up_id>", methods=['PUT', 'OPTIONS'])
 def update_follow_up(follow_up_id):
     # Route to update an follow_up by its ID.
     try:
@@ -71,7 +71,7 @@ def update_follow_up(follow_up_id):
         return jsonify(traceback, 500)
         # Return general error response.
 
-@app.route("/delete-follow-up/<int:follow_up_id>", methods=['DELETE'])
+@app.route("/delete-follow-up/<int:follow_up_id>", methods=['DELETE', 'OPTIONS'])
 def delete_follow_up(follow_up_id):
     # Route to delete an follow_up by its ID.
     try:

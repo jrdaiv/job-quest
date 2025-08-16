@@ -26,7 +26,7 @@ def create_user():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/all-users', methods=['GET'])
+@app.route('/all-users', methods=['GET', 'OPTIONS'])
 @cache.cached(timeout=60)
 def get_users():
     all_users = users_svc.get_all()
@@ -37,7 +37,7 @@ def get_by_id(user_id):
     user = users_svc.get_by_id(user_id)
     return s.user_schema.jsonify(user), 200
 
-@app.route('/update-user/<int:user_id>', methods=['POST'])
+@app.route('/update-user/<int:user_id>', methods=['POST', 'OPTIONS'])
 def update_user(user_id):
     try:
         try:
@@ -51,7 +51,7 @@ def update_user(user_id):
         return jsonify(traceback, 500)
 
 
-@app.route('/delete-user/<int:user_id>', methods=['DELETE'])
+@app.route('/delete-user/<int:user_id>', methods=['DELETE', 'OPTIONS'])
 def delete(user_id):
     try:
         return users_svc.delete(user_id)

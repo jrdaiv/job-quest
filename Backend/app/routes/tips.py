@@ -9,7 +9,7 @@ from app.config.caching import cache
 app = Blueprint('tips', __name__, url_prefix='/api/tips')
 # Create a Blueprint for tips with a URL prefix.
 
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['POST', 'OPTIONS'])
 def create_tip():
     # Route to create a new tip.
     try:
@@ -28,28 +28,28 @@ def create_tip():
         return jsonify(traceback, 500)
         # Return general error response.
 
-@app.route('/all', methods=['GET'])
+@app.route('/all', methods=['GET', 'OPTIONS'])
 def get_all_tips():
     # Route to get all tips.
     all_tips = tips_svc.get_all_tips()
     return s.tips_schema.jsonify(all_tips), 200
     # Return the tips in JSON format with a 200 status code.
 
-@app.route("/<int:tip_id>", methods=['GET'])
+@app.route("/<int:tip_id>", methods=['GET', 'OPTIONS'])
 def get_tip_by_id(tip_id):
     # Route to get a tip by its ID.
     tip = tips_svc.get_tip_by_id(tip_id)
     return s.tip_schema.jsonify(tip), 200
     # Return the tip in JSON format with a 200 status code.
 
-@app.route("/mission/<int:mission_id>", methods=['GET'])
+@app.route("/mission/<int:mission_id>", methods=['GET', 'OPTIONS'])
 def get_by_mission_id(mission_id):
     # Route to get tips by mission ID.
     tips = tips_svc.get_by_mission_id(mission_id)
     return s.tips_schema.jsonify(tips), 200
     # Return the tips in JSON format with a 200 status code.
 
-@app.route("/update-tip/<int:tip_id>", methods=['PUT'])
+@app.route("/update-tip/<int:tip_id>", methods=['PUT', 'OPTIONS'])
 def update_tip(tip_id):
     # Route to update a tip by its ID.
     try:
@@ -67,7 +67,7 @@ def update_tip(tip_id):
         return jsonify(traceback, 500)
         # Return general error response.
 
-@app.route("/delete-tip/<int:tip_id>", methods=['DELETE'])
+@app.route("/delete-tip/<int:tip_id>", methods=['DELETE', 'OPTIONS'])
 def delete_tip(tip_id):
     # Route to delete a tip by its ID.
     try:
