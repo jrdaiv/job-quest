@@ -202,33 +202,35 @@ const JobTracking: React.FC = () => {
 
   // Fetch jobs
   const fetchJobs = useCallback(
-    async (forcedUpdate = false) => {
-      try {
-        const token = localStorage.getItem("access_token"); // Retrieve the JWT from local storage
-        if (!token) {
-          throw new Error("No access token found");
-        }
-
-        const decodedToken = jwtDecode<DecodedToken>(token); // Decode the JWT
-        const user_id = decodedToken.sub.id; // Extract the user_id from the decoded token
-
-        const response = await axios.get(
-          `/api/jobs/${user_id}/all?forced_update=${forcedUpdate}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`, // Send token in the Authorization header
-            },
-          }
-        );
-        setJobs(response.data);
-        setHasJobs(response.data.length > 0);
-        navigate("/job-tracking");
-      } catch (error) {
-        console.error("Error fetching jobs:", error);
+  async (forcedUpdate = false) => {
+    try {
+      const token = localStorage.getItem("access_token");
+      if (!token) {
+        throw new Error("No access token found");
       }
-    },
-    [navigate]
-  ); // Add necessary dependencies like `navigate` here
+
+      const decodedToken = jwtDecode<DecodedToken>(token);
+      const user_id = decodedToken.sub.id;
+
+      const response = await axios.get(
+        `/api/jobs/${user_id}/all?forced_update=${forcedUpdate}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // Ensure jobs is always an array
+      setJobs(Array.isArray(response.data) ? response.data : []);
+      setHasJobs((Array.isArray(response.data) ? response.data : []).length > 0);
+    } catch (error) {
+      console.error("Error fetching jobs:", error);
+      setJobs([]); // Set to empty array on error
+      setHasJobs(false);
+    }
+  },
+  [navigate]
+);
 
   // Update the useEffect hook
   useEffect(() => {
@@ -405,48 +407,55 @@ const JobTracking: React.FC = () => {
   };
 
   const handleDoThisNext = () => {
-    if (jobs.length < 2) {
-      setSelectedJob(null);
-      setShowOffCanvas(true);
-      return;
-    }
-
-    const statusPriority = {
-      "Not Started": 1,
-      "Resume Tailored": 2,
-      Applied: 3,
-      "Followed-up": 4,
-      Interviewing: 5,
-      Rejected: 6,
-    };
-
-    const filteredJobs = jobs.filter(
-      job =>
-        statusPriority[job.status as keyof typeof statusPriority] !== undefined
-    );
-
-    const sortedJobs = filteredJobs.sort((a, b) => {
-      if (b.motivation === a.motivation) {
-        return (
-          statusPriority[a.status as keyof typeof statusPriority] -
-          statusPriority[b.status as keyof typeof statusPriority]
-        );
-      }
-      return b.motivation - a.motivation;
-    });
-
-    const selectedJob =
-      sortedJobs.find(
-        job =>
-          statusPriority[job.status as keyof typeof statusPriority] <
-          statusPriority["Followed-up"]
-      ) ||
-      sortedJobs[0] ||
-      null;
-
-    setSelectedJob(selectedJob);
+  if (jobs.length < 2) {
+    setSelectedJob(null);
     setShowOffCanvas(true);
+    return;
+  }
+
+  // Guard clause to ensure jobs is an array
+  if (!Array.isArray(jobs)) {
+    console.warn("jobs is not an array, resetting to empty array");
+    setJobs([]);
+    return;
+  }
+
+  const statusPriority = {
+    "Not Started": 1,
+    "Resume Tailored": 2,
+    Applied: 3,
+    "Followed-up": 4,
+    Interviewing: 5,
+    Rejected: 6,
   };
+
+  const filteredJobs = jobs.filter(
+    job =>
+      statusPriority[job.status as keyof typeof statusPriority] !== undefined
+  );
+
+  const sortedJobs = filteredJobs.sort((a, b) => {
+    if (b.motivation === a.motivation) {
+      return (
+        statusPriority[a.status as keyof typeof statusPriority] -
+        statusPriority[b.status as keyof typeof statusPriority]
+      );
+    }
+    return b.motivation - a.motivation;
+  });
+
+  const selectedJob =
+    sortedJobs.find(
+      job =>
+        statusPriority[job.status as keyof typeof statusPriority] <
+        statusPriority["Followed-up"]
+    ) ||
+    sortedJobs[0] ||
+    null;
+
+  setSelectedJob(selectedJob);
+  setShowOffCanvas(true);
+};
 
   return (
     <>
