@@ -72,6 +72,9 @@ const JobTracking: React.FC = () => {
   const sortDropdownRef = useRef<HTMLDivElement>(null);
   const filterDropdownRef = useRef<HTMLDivElement>(null);
   const handleClose = () => setShowOffCanvas(false); // Handle closing the off-canvas
+
+const VITE_API_URL = import.meta.env.VITE_API_URL;
+
   const navigate = useNavigate();
 
   const [jobData, setJobData] = useState<JobsData>({
@@ -187,7 +190,7 @@ const JobTracking: React.FC = () => {
         },
       };
 
-      const response = await axios.post("/api/jobs/register", jobInfo, {
+      const response = await axios.post(`${VITE_API_URL}/api/jobs/register`, jobInfo, {
         headers: {
           Authorization: `Bearer ${token}`, // Send token in the Authorization header
         },
@@ -213,7 +216,7 @@ const JobTracking: React.FC = () => {
       const user_id = decodedToken.sub.id;
 
       const response = await axios.get(
-        `/api/jobs/${user_id}/all?forced_update=${forcedUpdate}`,
+        `${VITE_API_URL}/api/jobs/${user_id}/all?forced_update=${forcedUpdate}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -320,7 +323,7 @@ const JobTracking: React.FC = () => {
   const handleStatusChange = async (job_id: number, newStatus: string) => {
     try {
       // Make a request to update the job status in the backend
-      const response = await axios.put(`/api/jobs/update-job/${job_id}`, {
+      const response = await axios.put(`${VITE_API_URL}/api/jobs/update-job/${job_id}`, {
         status: newStatus, // Send the new status to the backend
       });
       console.log("Job status updated:", response.data);
@@ -349,7 +352,7 @@ const JobTracking: React.FC = () => {
   const updateJob = useCallback(async () => {
     try {
       const response = await axios.put(
-        `/api/jobs/update-job/${jobData.job_id}`,
+        `${VITE_API_URL}/api/jobs/update-job/${jobData.job_id}`,
         jobData
       );
       const updatedJobs = jobs.map(job =>
