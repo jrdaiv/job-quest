@@ -9,7 +9,7 @@ from app.config.config import Config as cf
 app = Blueprint('quests', __name__, url_prefix='/api/quests')
 # Create a Blueprint for quests with a URL prefix.
 
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['POST', 'OPTIONS'])
 def create_quest():
     # Route to create a new quest.
     try:
@@ -27,8 +27,8 @@ def create_quest():
     except traceback:
         return jsonify(traceback, 500)
         # Return error response if an exception occurs.
-    
-@app.route('/all', methods=['GET'])
+
+@app.route('/all', methods=['GET', 'OPTIONS'])
 @cache.cached(timeout=60)
 def get_all():
     # Route to get all quests.
@@ -37,7 +37,7 @@ def get_all():
     return s.quests_schema.jsonify(all_quests), 200
     # Return the quests in JSON format with a 200 status code.
 
-@app.route("/<int:quest_id>", methods=['GET'])
+@app.route("/<int:quest_id>", methods=['GET', 'OPTIONS'])
 def get_by_id(quest_id):
     # Route to get a quest by its ID.
     quest = quests_svc.get_by_id(quest_id)
@@ -45,7 +45,7 @@ def get_by_id(quest_id):
     return s.quest_schema.jsonify(quest), 200
     # Return the quest in JSON format with a 200 status code.
 
-@app.route("/update-quest/<int:quest_id>", methods=['PUT'])
+@app.route("/update-quest/<int:quest_id>", methods=['PUT', 'OPTIONS'])
 def update_quest(quest_id):
     # Route to update a quest by its ID.
     try:
@@ -62,8 +62,8 @@ def update_quest(quest_id):
     except traceback:
         return jsonify(traceback, 500)
         # Return error response if an exception occurs.
-    
-@app.route("/delete-quest/<int:quest_id>", methods=['DELETE'])
+
+@app.route("/delete-quest/<int:quest_id>", methods=['DELETE', 'OPTIONS'])
 def delete_quest(quest_id):
     # Route to delete a quest by its ID.
     try:
