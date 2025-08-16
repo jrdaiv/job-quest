@@ -16,7 +16,7 @@ def should_force_update():
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-@app.route('/register', methods=[['POST', 'OPTIONS']])
+@app.route('/register', methods=['POST', 'OPTIONS'])
 def create_job():
     # Route to create a new job
     try:
