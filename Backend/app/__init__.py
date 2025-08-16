@@ -1,7 +1,8 @@
 from flask import Flask
 from flask_login import LoginManager  # Manage user sessions and login/logout state
 from flask_jwt_extended import JWTManager  # Handle JWT-based authentication
-from flask_cors import CORS  # Enable Cross-Origin Resource Sharing
+from flask_cors import CORS
+from flask_migrate import Migrate  # Enable Cross-Origin Resource Sharing
 from app.config.config import Config as cf  # Load configuration values
 from app.database.database import database as db  # Import the SQLAlchemy database instance
 from app.config.caching import cache  # Import cache instance (like Flask-Caching)
@@ -21,7 +22,7 @@ def create_app():
     r"/api/*": {"origins": ["https://job-quest-frontend.onrender.com", "http://localhost:5000", "http://localhost:5173"]}
 })
 
-
+    migrate = Migrate(app, db)
 
     # Load configuration settings from the custom config class
     app.config.from_object(cf)
@@ -40,12 +41,12 @@ def create_app():
     from app.database import models as md
 
     # Import and register route blueprints (modular route files)
-    from app.routes import quests, jobs, follow_ups, hiring_managers, recruiters, users, auth
+    from app.routes import quests, jobs, follow_ups, hiring_managers, recruiters, users, auth, missions, instructions, tips
 
     app.register_blueprint(quests.app)           # Register quests routes
-    # app.register_blueprint(missions.app)       # Example: missions routes (commented out)
-    # app.register_blueprint(instructions.app)   # Example: instructions routes (commented out)
-    # app.register_blueprint(tips.app)           # Example: tips routes (commented out)
+    app.register_blueprint(missions.app)       # Example: missions routes (commented out)
+    app.register_blueprint(instructions.app)   # Example: instructions routes (commented out)
+    app.register_blueprint(tips.app)           # Example: tips routes (commented out)
     app.register_blueprint(jobs.app)             # Register jobs routes
     app.register_blueprint(follow_ups.app)       # Register follow-up routes
     app.register_blueprint(hiring_managers.app)  # Register hiring manager routes
