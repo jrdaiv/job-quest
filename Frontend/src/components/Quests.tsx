@@ -293,9 +293,8 @@ const QuestPage: React.FC<QuestsProps> = ({ onQuestsClick }) => {
                                                 <div className=' '>
                                                     <Card
                                                         key={index}
-                                                        className="bg-gray-200 w-[264px] h-40"
-                                                    >
-                                                        <CardBody >
+                                                        className="bg-gray-200 w-[264px] h-40" onResize={undefined} onResizeCapture={undefined}                                                    >
+                                                        <CardBody onResize={undefined} onResizeCapture={undefined} >
                                                             <div className="flex gap-3 items-center">
                                                                 <img className="w-[18px] h-5" src={lockedLogo} alt="Locked" />
                                                                 <h2 className="w-[193px] text-[#6f6d6d] text-xs font-normal font-['Inter']">Mission {index + 1}</h2>
@@ -304,7 +303,7 @@ const QuestPage: React.FC<QuestsProps> = ({ onQuestsClick }) => {
                                                                 M{index + 1}: {mission.title}
                                                             </h2>
                                                         </CardBody>
-                                                        <CardFooter className="mt-4" >
+                                                        <CardFooter className="mt-4" onResize={undefined} onResizeCapture={undefined} >
                                                             <span className="text-sm text-gray-600 px-2 py-1 rounded-full">
 
                                                             </span>
@@ -320,8 +319,7 @@ const QuestPage: React.FC<QuestsProps> = ({ onQuestsClick }) => {
                                                 <Card
                                                     key={index}
                                                     className={`${isUnlocked ? '' : 'bg-gray-200'} w-[264px] h-40 relative ${!isUnlocked ? '' : `${hoverColor} cursor-pointer`} rounded-lg border-2 border-[#9e9d9d]`}
-                                                    onClick={() => isUnlocked && handleStartMission(currentQuest, mission)}
-                                                >
+                                                    onClick={() => isUnlocked && handleStartMission(currentQuest, mission)} onResize={undefined} onResizeCapture={undefined}                                                >
                                                     {/* Mission ID and Title */}
                                                     <div className="absolute left-[16px] top-[23.5px] text-[#6f6d6d] text-xs flex items-center font-normal font-['Inter']">
                                                         {!isUnlocked && (
@@ -396,8 +394,7 @@ const QuestPage: React.FC<QuestsProps> = ({ onQuestsClick }) => {
                                     <Button
                                         onClick={handleBackToQuests}
                                         variant={'text'}
-                                        className="h-[60px] px-7 py-[18px] bg-white rounded-[15px] border-2 border-[#087eff] justify-center items-center gap-2.5 inline-flex"
-                                    >
+                                        className="h-[60px] px-7 py-[18px] bg-white rounded-[15px] border-2 border-[#087eff] justify-center items-center gap-2.5 inline-flex" onResize={undefined} onResizeCapture={undefined}                                    >
                                         <p className="text-blue text-base font-bold font-['Inter'] leading-none">Back to Quests</p>
                                     </Button>
                                     {isNextQuestAvailable() && (
@@ -405,8 +402,7 @@ const QuestPage: React.FC<QuestsProps> = ({ onQuestsClick }) => {
                                             <Button
                                                 onClick={handleNextQuest}
                                                 variant={'text'}
-                                                className="h-[60px] px-7 py-[18px] bg-[#087eff] rounded-[15px] items-center gap-2.5"
-                                            >
+                                                className="h-[60px] px-7 py-[18px] bg-[#087eff] rounded-[15px] items-center gap-2.5" onResize={undefined} onResizeCapture={undefined}                                            >
                                                 Next Quest
                                             </Button>
                                             {isConfettiVisible && (
@@ -445,8 +441,7 @@ const QuestPage: React.FC<QuestsProps> = ({ onQuestsClick }) => {
                                             key={quest.quest_id}
                                             className={`${!isLocked ? '' : 'bg-gray-200'} w-[264px] h-40 relative ${isLocked ? '' : `${hoverColor} cursor-pointer`} relative rounded-lg border-2 border-[#9e9d9d]`}
                                             style={{ width: '264px', height: '160px' }} // Explicitly setting width and height to match the design
-                                            onClick={() => !isLocked && handleSelectQuest(quest)}
-                                        >
+                                            onClick={() => !isLocked && handleSelectQuest(quest)} onResize={undefined} onResizeCapture={undefined}                                        >
                                             {/* Quest ID */}
                                             <div className="absolute left-[16px] top-[23.5px] text-[#6f6d6d] text-xs flex items-center font-normal font-['Inter']">
                                                 {isLocked && (
@@ -494,14 +489,13 @@ const QuestPage: React.FC<QuestsProps> = ({ onQuestsClick }) => {
                         handler={handleOpenDialog}
                         ref={dialogRef}
                         className="bg-white rounded-[15px] border-2 border-[#9e9d9d] overflow-y-scroll max-h-[70vh] mx-auto"
-                        style={{ minHeight: '524px', height: 'auto', maxWidth: '544px', minWidth: 'auto' }}
-                    >
-                        <DialogHeader>
+                        style={{ minHeight: '524px', height: 'auto', maxWidth: '544px', minWidth: 'auto' }} onResize={undefined} onResizeCapture={undefined}                    >
+                        <DialogHeader onResize={undefined} onResizeCapture={undefined}>
                             <div className="dialog-header flex w-full">
                                 <X onClick={() => setOpen(false)} className="cursor-pointer" />
                             </div>
                         </DialogHeader>
-                        <DialogBody ref={dialogBodyRef} className='dialog-body w-full sm:w-[90%] mx-auto'>
+                        <DialogBody ref={dialogBodyRef} className='dialog-body w-full sm:w-[90%] mx-auto' onResize={undefined} onResizeCapture={undefined}>
                             <div>
                                 {selectedMission ? (
                                     <>
@@ -1011,10 +1005,10 @@ const QuestPage: React.FC<QuestsProps> = ({ onQuestsClick }) => {
 
                             {/* Finish button inside the DialogBody */}
                             <div className="flex justify-between mt-[160px]">
-                                <Button onClick={handleBackMission} className="bg-gray-400 text-white font-bold rounded-[15px] px-7 py-[18px]" variant={'text'} >
+                                <Button onClick={handleBackMission} className="bg-gray-400 text-white font-bold rounded-[15px] px-7 py-[18px]" variant={'text'} onResize={undefined} onResizeCapture={undefined} >
                                     Back
                                 </Button>
-                                <Button onClick={handleFinishMission} disabled={!isNextDisabled} className="bg-[#087eff] text-white font-bold rounded-[15px] px-7 py-[18px]" variant={'text'} >
+                                <Button onClick={handleFinishMission} disabled={!isNextDisabled} className="bg-[#087eff] text-white font-bold rounded-[15px] px-7 py-[18px]" variant={'text'} onResize={undefined} onResizeCapture={undefined} >
                                     Finish
                                 </Button>
                             </div>

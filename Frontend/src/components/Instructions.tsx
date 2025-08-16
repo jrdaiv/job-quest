@@ -95,7 +95,7 @@ const Instructions: React.FC = () => {
             <div className="flex items-center justify-center mt-8 lg:mt-[109px] mb-16 lg:mb-48">
               <Button
                 className="bg-[#ff2d55] cursor-pointer h-[50px] lg:h-[60px] text-white font-bold px-5 lg:px-7 py-3 lg:py-[18px] rounded-[15px] hover:bg-[#FF95AF] z-50"
-                onClick={handleButtonClick}>
+                onClick={handleButtonClick} onResize={undefined} onResizeCapture={undefined}>
                 Start Quest
               </Button>
             </div>

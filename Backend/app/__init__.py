@@ -18,7 +18,7 @@ def create_app():
     
     # Enable CORS for all routes and origins (public access)
     CORS(app, supports_credentials=True, resources={
-    r"/api/*": {"origins": "https://job-quest-frontend.onrender.com"}
+    r"/api/*": {"origins": ["https://job-quest-frontend.onrender.com", "http://localhost:5000", "http://localhost:5173"]}
 })
 
 

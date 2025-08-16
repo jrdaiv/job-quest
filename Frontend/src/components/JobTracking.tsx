@@ -1170,9 +1170,8 @@ const JobTracking: React.FC = () => {
       <Dialog
         className="overflow-auto max-h-[70vh] p-[16px]"
         open={open}
-        handler={handleOpenDialog}
-      >
-        <DialogBody>
+        handler={handleOpenDialog} onResize={undefined} onResizeCapture={undefined}      >
+        <DialogBody onResize={undefined} onResizeCapture={undefined}>
           <div className="mx-auto text-center">
             <div>
               <X
@@ -1370,8 +1369,7 @@ const JobTracking: React.FC = () => {
               onClick={isEditing ? updateJob : saveJob}
               className="py-[12px] px-[16px] bg-[#007AFF] hover:bg-opacity-[36%] text-white text-[15px] font-bold mx-auto text-center mt-[24px] w-full rounded-lg"
               variant={"text"}
-              style={{ textTransform: "none" }}
-            >
+              style={{ textTransform: "none" }} onResize={undefined} onResizeCapture={undefined}            >
               {isEditing ? "Update Job" : "Add Job"}
             </Button>
           </div>
